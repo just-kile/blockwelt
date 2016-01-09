@@ -16,7 +16,16 @@ module.factory('projectionService', function () {
         return block;
     }
 
-    function createFeatureFromBlock(block) {
+    function getMaxCount(blocks) {
+        var m = 0;
+        for (var i = 0; i < blocks.length; i++) {
+            m = blocks[i].count > m ? blocks[i].count : m;
+        }
+        return m;
+    }
+
+    function createFeatureFromBlock(block, maxCount) {
+
         //TODO proper mapping from count to color/alpha
         var c = block.count > 0 ? 'rgba(255,0,0,0.6)' : 'rgba(0,0,255,0.6)';
         var style = new ol.style.Style({
@@ -70,11 +79,13 @@ module.factory('projectionService', function () {
             return projection;
         },
 
+
         convertToFeatures: function (projection) {
+            var maxCount = getMaxCount(projection);
             var features = [];
             for (var x = 0; x < projection.length; x++) {
                 for (var y = 0; y < projection[0].length; y++) {
-                    features.push(createFeatureFromBlock(projection[x][y]));
+                    features.push(createFeatureFromBlock(projection[x][y], maxCount));
                 }
             }
             return features;
