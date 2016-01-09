@@ -2,6 +2,9 @@ var module = angular.module('blockweltapp');
 
 module.factory('projectionService', function () {
 
+    var mapProjection = ol.proj.get("EPSG:3857");
+    var sourceProjection = ol.proj.get("EPSG:4326");
+
     function createBlock(longitude, latitude, grid) {
         var block = {
             longitude: longitude,
@@ -13,11 +16,11 @@ module.factory('projectionService', function () {
         return block;
     }
 
-    function createFeatureFromBlock(block){
+    function createFeatureFromBlock(block) {
         var style = new ol.style.Style({
             //TODO proper mapping from count to color/alpha
             fill: new ol.style.Fill({
-                color: 'rgba(255, 0, 0, ' + 1/block.count+ ')'
+                color: 'rgba(255, 0, 0, ' + 1 / block.count + ')'
             }),
             stroke: new ol.style.Stroke({
                 color: '#319FD3',
@@ -25,13 +28,12 @@ module.factory('projectionService', function () {
             })
         });
         console.log(block);
-        var extent = [
-            block.longitude,
+        var extent = ol.proj.transformExtent([
             block.latitude,
-            block.longitude + block.height,
-            block.latitude + block.width
-        ];
-        console.log(extent);
+            block.longitude,
+            block.latitude + block.width,
+            block.longitude + block.height
+        ], sourceProjection, mapProjection);
         var feature = new ol.Feature({
             geometry: ol.geom.Polygon.fromExtent(extent),
             style: style
@@ -64,7 +66,6 @@ module.factory('projectionService', function () {
 
             return projection;
         },
-
 
 
         convertToFeatures: function (projection) {
