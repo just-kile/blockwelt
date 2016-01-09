@@ -1,5 +1,20 @@
 angular.module('blockweltapp').controller("MainController", function ($http, importService, projectionService) {
 
+    function processData(rawData) {
+        var grid = {
+            longitude: 13,
+            latitude: 52,
+            width: 0.1,
+            height: 0.1,
+            numLongitude: 10,
+            numLatitude: 10
+        };
+
+        var projection = projectionService.project(grid, rawData);
+        var features = projectionService.convertToFeatures(projection);
+        vectorSource.addFeatures(features);
+    }
+
     this.upload = function (path) {
         $http({
             method: 'GET',
@@ -7,18 +22,7 @@ angular.module('blockweltapp').controller("MainController", function ($http, imp
         }).success(function (data) {
             var rawData = importService.importData(data);
 
-            var grid = {
-                longitude: 13,
-                latitude: 52,
-                width: 0.1,
-                height: 0.1,
-                numLongitude: 10,
-                numLatitude: 10
-            };
-
-            var projection = projectionService.project(grid, rawData);
-            var features = projectionService.convertToFeatures(projection);
-            vectorSource.addFeatures(features);
+            processData(rawData);
         }).error(function () {
             alert("error");
         });
@@ -34,7 +38,7 @@ angular.module('blockweltapp').controller("MainController", function ($http, imp
         r.onloadend = function (e) {
             var data = e.target.result;
             var locations = angular.fromJson(data);
-            //send you binary data via $http or $resource or do anything else with it
+            processData(locations);
         }
         r.readAsBinaryString(f);
     };
