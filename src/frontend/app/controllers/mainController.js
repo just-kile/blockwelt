@@ -6,15 +6,25 @@ angular.module('blockweltapp').controller("MainController", function ($http, imp
             url: path,
         }).success(function (data) {
             var rawData = importService.importData(data);
-            console.log(rawData);
-            // TODO: Use the data, my little padawan
+            var grid = {
+                longitude: 1400000,
+                latitude: 6800000,
+                width: 20000,
+                height: 15000,
+                numLongitude: 10,
+                numLatitude: 10
+            };
+
+            var projection = projectionService.project(grid, rawData);
+            var features = projectionService.convertToFeatures(projection);
+            vectorSource.addFeatures(features);
         }).error(function () {
             alert("error");
         });
     };
 
     this.initialize = function () {
-        this.upload('../../../example/locations.json');
+        //this.upload('../../../example/locations.json');
     };
 
     var map = new ol.Map({
@@ -29,37 +39,16 @@ angular.module('blockweltapp').controller("MainController", function ($http, imp
             zoom: 2
         })
     });
-    var graticule = new ol.Graticule();
-    graticule.setMap(map);
 
     var vectorSource = new ol.source.Vector();
     map.addLayer(new ol.layer.Vector({
         source: vectorSource
     }));
+    var graticule = new ol.Graticule();
+    graticule.setMap(map);
+
 
     this.with_data = function () {
-        var grid = {
-            longitude: 1400000,
-            latitude: 6800000,
-            width: 20000,
-            height: 15000,
-            numLongitude: 10,
-            numLatitude: 10
-        };
-
-        var data = {
-            "locations": [{
-                "latitudeE7": 525557393,
-                "longitudeE7": 133418855
-            }, {
-                "latitudeE7": 525557393,
-                "longitudeE7": 133418855
-            }]
-        }
-
-        var projection = projectionService.project(grid, []);
-        var features = projectionService.convertToFeatures(projection);
-        vectorSource.addFeatures(features);
-
+        this.upload('locations.json');
     }
 })
