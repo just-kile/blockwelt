@@ -1,31 +1,55 @@
 angular.module('blockweltapp').controller("MainController", function ($http, importService, projectionService) {
 
+    function processData(rawData) {
+        var grid = {
+            longitude: 13,
+            latitude: 52,
+            width: 0.1,
+            height: 0.1,
+            numLongitude: 10,
+            numLatitude: 10
+        };
+
+        var projection = projectionService.project(grid, rawData);
+        var features = projectionService.convertToFeatures(projection);
+        vectorSource.addFeatures(features);
+    }
+
     this.upload = function (path) {
         $http({
             method: 'GET',
             url: path,
         }).success(function (data) {
-            var rawData = importService.importData(data);
-
-            var grid = {
-                longitude: 13,
-                latitude: 52,
-                width: 0.1,
-                height: 0.1,
-                numLongitude: 10,
-                numLatitude: 10
-            };
-
-            var projection = projectionService.project(grid, rawData);
-            var features = projectionService.convertToFeatures(projection);
-            vectorSource.addFeatures(features);
+            processData(data)
         }).error(function () {
             alert("error");
         });
     };
 
-    this.initialize = function () {
-        //this.upload('../../../example/locations.json');
+    function processData(locations) {
+        var model = importService.importData(locations);
+        var grid = {
+            longitude: 13,
+            latitude: 52,
+            width: 0.1,
+            height: 0.1,
+            numLongitude: 10,
+            numLatitude: 10
+        };
+        var projection = projectionService.project(grid, model);
+        var features = projectionService.convertToFeatures(projection);
+        vectorSource.addFeatures(features);
+    }
+
+    this.visualize = function () {
+        var f = document.getElementById('file').files[0],
+            r = new FileReader();
+        r.onloadend = function (e) {
+            var data = e.target.result;
+            var locations = angular.fromJson(data);
+            processData(locations);
+        }
+        r.readAsBinaryString(f);
     };
 
     var map = new ol.Map({

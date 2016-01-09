@@ -21,6 +21,7 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
+            'src/frontend/components/bower-ol3/build/ol.js',
             'src/frontend/components/angular/angular.js',
             'src/frontend/components/angular-mocks/angular-mocks.js',
             'src/frontend/app/**/*.js',
