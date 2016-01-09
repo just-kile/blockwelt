@@ -1,4 +1,4 @@
-angular.module('blockweltapp').controller("MainController", function () {
+angular.module('blockweltapp').controller("MainController", function (projectionService) {
         var vm = this;
         vm.welcome_message = "This is Blockwelt.";
         var map = new ol.Map({
@@ -30,12 +30,38 @@ angular.module('blockweltapp').controller("MainController", function () {
                     width: 1
                 })
             });
-            var polygon = ol.geom.Polygon.fromExtent([1400000, 6800000, 1600000, 6900000]);
+            var polygon = ol.geom.Polygon.fromExtent([1400000, 6800000, 1600000, 6950000]);
             var feature = new ol.Feature({
                 geometry: polygon
             });
             feature.setStyle(style);
             vectorSource.addFeature(feature);
+        };
+
+        vm.with_data = function() {
+            var grid = {
+                longitude: 1400000,
+                latitude: 6800000,
+                width: 20000,
+                height: 15000,
+                numLongitude: 10,
+                numLatitude: 10
+            };
+
+            var data = {
+                "locations": [{
+                    "latitudeE7": 525557393,
+                    "longitudeE7": 133418855
+                }, {
+                    "latitudeE7": 525557393,
+                    "longitudeE7": 133418855
+                }]
+            }
+
+            var projection = projectionService.project(grid, []);
+            var features = projectionService.convertToFeatures(projection);
+            vectorSource.addFeatures(features);
+
         }
     }
 );

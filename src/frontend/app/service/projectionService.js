@@ -1,6 +1,6 @@
 var module = angular.module('blockweltapp');
 
-module.factory('projectionService', function() {
+module.factory('projectionService', function () {
 
     function createBlock(longitude, latitude, grid) {
         var block = {
@@ -13,9 +13,36 @@ module.factory('projectionService', function() {
         return block;
     }
 
+    function createFeatureFromBlock(block){
+        var style = new ol.style.Style({
+            //TODO proper mapping from count to color/alpha
+            fill: new ol.style.Fill({
+                color: 'rgba(255, 0, 0, ' + 1/block.count+ ')'
+            }),
+            stroke: new ol.style.Stroke({
+                color: '#319FD3',
+                width: 1
+            })
+        });
+        console.log(block);
+        var extent = [
+            block.longitude,
+            block.latitude,
+            block.longitude + block.height,
+            block.latitude + block.width
+        ];
+        console.log(extent);
+        var feature = new ol.Feature({
+            geometry: ol.geom.Polygon.fromExtent(extent),
+            style: style
+        });
+        return feature;
+
+    }
+
     var service = {
 
-        project: function(grid, data) {
+        project: function (grid, data) {
 
             var projection = [];
 
@@ -26,7 +53,7 @@ module.factory('projectionService', function() {
                 }
             }
 
-            angular.forEach(data, function(coordinate) {
+            angular.forEach(data, function (coordinate) {
                 var x = ((coordinate.latitude - grid.latitude) / grid.width) | 0
                 var y = ((coordinate.longitude - grid.longitude) / grid.height) | 0
 
@@ -36,6 +63,28 @@ module.factory('projectionService', function() {
             });
 
             return projection;
+        },
+
+
+
+        convertToFeatures: function (projection) {
+            //var xmin = projection[0][0].longitude;
+            //var ymin = projection[0][0].latitude;
+            //var xmax = xmin + projection.length * projection[0][0].width;
+            //var ymax = ymin + projection[0].length * projection[0][0].height;
+            //var geo = {
+            //    type: "FeatureCollection",
+            //    bbox: [xmin, ymin, xmax, ymax],
+            //    features: []
+            //};
+
+            var features = [];
+            for (var x = 0; x < projection.length; x++) {
+                for (var y = 0; y < projection[0].length; y++) {
+                    features.push(createFeatureFromBlock(projection[x][y]));
+                }
+            }
+            return features;
         }
 
     };
