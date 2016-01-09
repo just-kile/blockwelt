@@ -1,5 +1,23 @@
 <html>
+<head>
+    <script src="http://openlayers.org/en/v3.11.2/build/ol.js"></script>
+</head>
 <body>
 This is Blockwelt.
+<div id="map" class="map"></div>
+<script>
+    var map = new ol.Map({
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.OSM()
+            })
+        ],
+        target: 'map',
+        view: new ol.View({
+            center: [0, 0],
+            zoom: 2
+        })
+    });
+</script>
 </body>
 </html>
