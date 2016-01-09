@@ -6,11 +6,12 @@ angular.module('blockweltapp').controller("MainController", function ($http, imp
             url: path,
         }).success(function (data) {
             var rawData = importService.importData(data);
+
             var grid = {
-                longitude: 1400000,
-                latitude: 6800000,
-                width: 20000,
-                height: 15000,
+                longitude: 52,
+                latitude: 13,
+                width: 0.1,
+                height: 0.1,
                 numLongitude: 10,
                 numLatitude: 10
             };
@@ -35,8 +36,8 @@ angular.module('blockweltapp').controller("MainController", function ($http, imp
         ],
         target: 'map',
         view: new ol.View({
-            center: [0, 0],
-            zoom: 2
+            center: [1520000, 6880000],
+            zoom: 6
         })
     });
 
