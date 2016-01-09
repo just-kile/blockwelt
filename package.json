@@ -4,7 +4,7 @@
   "description": "See where you have been and share with friends.",
   "main": "src/backend/backendServer.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "karma start --single-run",
     "start": "node src/backend/backendServer.js"
   },
   "repository": {
