@@ -17,6 +17,17 @@ angular.module('blockweltapp').controller("MainController", function ($http, imp
         this.upload('../../../example/locations.json');
     };
 
+    this.visualize = function () {
+        var f = document.getElementById('file').files[0],
+            r = new FileReader();
+        r.onloadend = function (e) {
+            var data = e.target.result;
+            var locations = angular.fromJson(data);
+            //send you binary data via $http or $resource or do anything else with it
+        }
+        r.readAsBinaryString(f);
+    };
+
     var map = new ol.Map({
         layers: [
             new ol.layer.Tile({
