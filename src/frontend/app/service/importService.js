@@ -1,4 +1,4 @@
-var module = angular.module('blockweltapp', []);
+var module = angular.module('blockweltapp');
 
 module.factory('importService', function() {
 
