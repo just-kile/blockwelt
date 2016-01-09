@@ -27,7 +27,7 @@ module.factory('projectionService', function () {
     }
 
     function createFeatureFromBlock(block, maxCount) {
-        var c = 255*Math.log(1 + block.count / maxCount);
+        var c = 255 - 255*Math.log(1 + block.count / maxCount);
         var color = [255, Math.floor(c), 0,.6];
         color = block.count == 0 ? [0,0,0,0.2] : color;
         var style = new ol.style.Style({
