@@ -1,35 +1,44 @@
 angular.module('blockweltapp').controller("MainController", function ($http, importService, projectionService) {
-
+    var model;
     this.upload = function (path) {
         $http({
             method: 'GET',
             url: path
         }).success(function (data) {
-            processData(data)
+            loadData(data)
         }).error(function () {
             alert("error");
         });
     };
-
-    function processData(locations) {
-        var model = importService.importData(locations);
+    const gridSize = 20;
+    function updateMap(extent) {
         var grid = {
-            longitude: 13,
-            latitude: 52,
-            width: 0.1,
-            height: 0.1,
-            numLongitude: 10,
-            numLatitude: 10
+            latitude: extent[1],
+            longitude: extent[0],
+            width: Math.abs(extent[1] - extent[3])/ gridSize,
+            height: Math.abs(extent[0] - extent[2])/gridSize,
+            numLongitude: gridSize,
+            numLatitude: gridSize
         };
+        console.log(grid);
         var projection = projectionService.project(grid, model);
         var features = projectionService.convertToFeatures(projection);
+        vectorSource.clear();
         vectorSource.addFeatures(features);
     }
+
+    function loadData(locations) {
+        model = importService.importData(locations);
+        updateMap([52,13, 53, 14]);
+    }
+
 
     function onMoveEnd(evt) {
         var map = evt.map;
         var extent = map.getView().calculateExtent(map.getSize());
+        extent = ol.proj.transformExtent(extent, "EPSG:3857", "EPSG:4326");
         console.log(extent);
+        updateMap(extent);
     }
 
     this.visualize = function () {
@@ -38,7 +47,7 @@ angular.module('blockweltapp').controller("MainController", function ($http, imp
         r.onloadend = function (e) {
             var data = e.target.result;
             var locations = angular.fromJson(data);
-            processData(locations);
+            loadData(locations);
         };
         r.readAsBinaryString(f);
     };
@@ -62,9 +71,6 @@ angular.module('blockweltapp').controller("MainController", function ($http, imp
     map.addLayer(new ol.layer.Vector({
         source: vectorSource
     }));
-    var graticule = new ol.Graticule();
-    graticule.setMap(map);
-
 
     this.with_data = function () {
         this.upload('locations.json');
