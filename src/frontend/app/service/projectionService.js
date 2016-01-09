@@ -16,25 +16,27 @@ module.factory('projectionService', function () {
         return block;
     }
 
-    function getMaxCount(blocks) {
+    function getMaxCount(projection) {
         var m = 0;
-        for (var i = 0; i < blocks.length; i++) {
-            m = blocks[i].count > m ? blocks[i].count : m;
+        for (var x = 0; x < projection.length; x++) {
+            for (var y = 0; y < projection[0].length; y++) {
+                m = projection[x][y].count > m ? projection[x][y].count : m;
+            }
         }
         return m;
     }
 
     function createFeatureFromBlock(block, maxCount) {
-
-        //TODO proper mapping from count to color/alpha
-        var c = block.count > 0 ? 'rgba(255,0,0,0.6)' : 'rgba(0,0,255,0.6)';
+        var c = 255*Math.log(1 + block.count / maxCount);
+        var color = [255, Math.floor(c), 0,.6];
+        color = block.count == 0 ? [0,0,0,0.2] : color;
         var style = new ol.style.Style({
             fill: new ol.style.Fill({
-                color: c
+                color: color
             }),
             stroke: new ol.style.Stroke({
-                color: '#319FD3',
-                width: 1
+                color: 'black',
+                width: .1
             })
         });
         var extent = ol.proj.transformExtent([
@@ -56,9 +58,6 @@ module.factory('projectionService', function () {
         project: function (grid, data) {
 
             var projection = [];
-
-            console.log(data[0]);
-            console.log(grid);
 
             for (var y = 0; y < grid.numLongitude; y++) {
                 projection.push([]);
