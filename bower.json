@@ -1,0 +1,13 @@
+{
+  "name": "blockwelt",
+  "version": "1.0.0",
+  "homepage": "https://github.com/just-kile/blockwelt",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
