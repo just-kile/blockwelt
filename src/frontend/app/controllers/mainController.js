@@ -16,37 +16,17 @@ angular.module('blockweltapp').controller("MainController", function () {
         var graticule = new ol.Graticule({targetSize: 50});
         graticule.setMap(map);
 
-        var featureOverlay = new ol.FeatureOverlay();
-        featureOverlay.setMap(map);
+        var vectorSource = new ol.source.Vector();
+        map.addLayer(new ol.layer.Vector({
+            source: vectorSource
+        }));
 
         //vm.paint_blocks = function () {
-
-        var geojsonObject = {
-            'type': 'FeatureCollection',
-            'crs': {
-                'type': 'name',
-                'properties': {
-                    'name': 'EPSG:3857'
-                }
-            },
-            'features': [
-                {
-                    'type': 'Feature',
-                    'geometry': {
-                        'type': 'Polygon',
-                        'coordinates': [[
-                            [1.4e6, 6.9e6],
-                            [1.6e6, 6.9e6],
-                            [1.6e6, 6.8e6],
-                            [1.4e6, 6.8e6]
-                        ]]
-                    }
-                }
-            ]
-        };
-        var features = (new ol.format.GeoJSON()).readFeatures(geojsonObject);
-        featureOverlay.addFeature(features[0]);
-
+        var polygon = ol.geom.Polygon.fromExtent([1400000, 6800000, 1600000, 6900000]);
+        var feature = new ol.Feature({
+            geometry: polygon
+        });
+        vectorSource.addFeature(feature);
         //}
     }
 );
