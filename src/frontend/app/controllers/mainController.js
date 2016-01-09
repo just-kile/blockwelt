@@ -8,8 +8,8 @@ angular.module('blockweltapp').controller("MainController", function ($http, imp
             var rawData = importService.importData(data);
 
             var grid = {
-                longitude: 52,
-                latitude: 13,
+                longitude: 13,
+                latitude: 52,
                 width: 0.1,
                 height: 0.1,
                 numLongitude: 10,
