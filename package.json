@@ -4,7 +4,7 @@
   "description": "See where you have been and share with friends.",
   "main": "src/backend/backendServer.js",
   "scripts": {
-    "test": "./node_modules/.bin/karma start --browsers Firefox --single-run",
+    "test": "karma start",
     "start": "node src/backend/backendServer.js"
   },
   "repository": {
