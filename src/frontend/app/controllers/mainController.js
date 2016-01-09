@@ -3,7 +3,7 @@ angular.module('blockweltapp').controller("MainController", function ($http, imp
     this.upload = function (path) {
         $http({
             method: 'GET',
-            url: path,
+            url: path
         }).success(function (data) {
             processData(data)
         }).error(function () {
@@ -69,4 +69,4 @@ angular.module('blockweltapp').controller("MainController", function ($http, imp
     this.with_data = function () {
         this.upload('locations.json');
     }
-})
+});
