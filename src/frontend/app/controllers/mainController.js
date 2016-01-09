@@ -9,8 +9,8 @@ angular.module('blockweltapp').controller("MainController", function($http){
         ],
         target: 'map',
         view: new ol.View({
-            center: [0, 0],
-            zoom: 2
+            center: [1492099.997378, 6889621.697647], //berlin
+            zoom: 9
         })
     });
     var graticule = new ol.Graticule({targetSize: 50});
