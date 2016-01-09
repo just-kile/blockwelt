@@ -13,6 +13,18 @@ angular.module('blockweltapp').controller("MainController", function($http){
             zoom: 2
         })
     });
-    var graticule = new ol.Graticule();
+    var graticule = new ol.Graticule({targetSize: 50});
     graticule.setMap(map);
+
+    vm.paint_blocks = function(){
+
+        var meridians = graticule.getMeridians();
+        var parallels = graticule.getParallels();
+        var example_meridian_index = Math.floor(meridians.length/2);
+        var example_parallels_index = Math.floor(parallels.length / 2);
+        console.log(meridians[example_meridian_index].getCoordinates()[0]);
+        console.log(meridians[example_meridian_index].getCoordinates()[1]);
+        console.log(parallels[example_parallels_index].getCoordinates()[0]);
+        console.log(parallels[example_parallels_index].getCoordinates()[1]);
+    }
 });
