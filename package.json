@@ -4,7 +4,7 @@
   "description": "See where you have been and share with friends.",
   "main": "src/backend/backendServer.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "karma start --single-run",
     "start": "node src/backend/backendServer.js"
   },
   "repository": {
@@ -25,6 +25,7 @@
     "karma": "^0.13.19",
     "karma-browserify": "^4.4.2",
     "karma-chrome-launcher": "^0.2.2",
+    "karma-firefox-launcher": "^0.1.7",
     "karma-jasmine": "^0.3.6"
   }
 }
