@@ -57,9 +57,6 @@ module.factory('projectionService', function () {
 
             var projection = [];
 
-            console.log(data[0]);
-            console.log(grid);
-
             for (var y = 0; y < grid.numLongitude; y++) {
                 projection.push([]);
                 for (var x = 0; x < grid.numLatitude; x++) {
