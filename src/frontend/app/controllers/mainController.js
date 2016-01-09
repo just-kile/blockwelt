@@ -1,20 +1,5 @@
 angular.module('blockweltapp').controller("MainController", function ($http, importService, projectionService) {
 
-    function processData(rawData) {
-        var grid = {
-            longitude: 13,
-            latitude: 52,
-            width: 0.1,
-            height: 0.1,
-            numLongitude: 10,
-            numLatitude: 10
-        };
-
-        var projection = projectionService.project(grid, rawData);
-        var features = projectionService.convertToFeatures(projection);
-        vectorSource.addFeatures(features);
-    }
-
     this.upload = function (path) {
         $http({
             method: 'GET',
@@ -41,6 +26,12 @@ angular.module('blockweltapp').controller("MainController", function ($http, imp
         vectorSource.addFeatures(features);
     }
 
+    function onMoveEnd(evt) {
+        var map = evt.map;
+        var extent = map.getView().calculateExtent(map.getSize());
+        console.log(extent);
+    }
+
     this.visualize = function () {
         var f = document.getElementById('file').files[0],
             r = new FileReader();
@@ -48,7 +39,7 @@ angular.module('blockweltapp').controller("MainController", function ($http, imp
             var data = e.target.result;
             var locations = angular.fromJson(data);
             processData(locations);
-        }
+        };
         r.readAsBinaryString(f);
     };
 
@@ -64,6 +55,8 @@ angular.module('blockweltapp').controller("MainController", function ($http, imp
             zoom: 6
         })
     });
+
+    map.on('moveend', onMoveEnd);
 
     var vectorSource = new ol.source.Vector();
     map.addLayer(new ol.layer.Vector({
