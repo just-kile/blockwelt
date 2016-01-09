@@ -10,13 +10,14 @@
 
     <script src="app/app.js"></script>
     <script src="app/controllers/mainController.js"></script>
+    <script src="app/service/projectionService.js"></script>
     <script src="app/service/importService.js"></script>
 </head>
 <body ng-controller="MainController as main">
 <div class="container">
     <h1>Welcome to Block Welt</h1>
     <div id="map" class="map" style="height: 200px"></div>
-    <button ng-click="main.paint_blocks()">Paint the blocks</button>
+    <button ng-click="main.with_data()">Use data</button>
 </div>
 
 <!-- load dialog -->
