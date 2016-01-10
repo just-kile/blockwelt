@@ -5,7 +5,8 @@
   "main": "src/backend/backendServer.js",
   "scripts": {
     "test": "karma start --single-run",
-    "start": "node src/backend/backendServer.js"
+    "start": "node src/backend/backendServer.js",
+    "postinstall": "bower install --allow-root"
   },
   "repository": {
     "type": "git",
