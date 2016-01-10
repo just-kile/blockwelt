@@ -11,6 +11,7 @@
 
     <script src="app/app.js"></script>
     <script src="app/controllers/mainController.js"></script>
+    <script src="app/controllers/mapController.js"></script>
     <script src="app/service/projectionService.js"></script>
     <script src="app/service/importService.js"></script>
 
@@ -44,13 +45,13 @@
 
     <p>
         Testing:
-        <button type="button" class="btn btn-info btn-sm" ng-click="main.with_data()">Use example data</button>
+        <button type="button" class="btn btn-info btn-sm" ng-click="main.showExampleData()">Use example data</button>
     </p>
     <p>
         Upload:
         <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Open Modal</button>
     </p>
-    <div id="map" class="map"></div>
+    <div id="map" class="map" ng-controller="MapController"></div>
 </div>
 
 <!-- load dialog -->
