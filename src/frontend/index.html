@@ -13,8 +13,8 @@
     <script src="app/controllers/mainController.js"></script>
     <script src="app/controllers/mapController.js"></script>
     <script src="app/controllers/uploadDialogController.js"></script>
-    <script src="app/service/projectionService.js"></script>
-    <script src="app/service/importService.js"></script>
+    <script src="app/services/projectionService.js"></script>
+    <script src="app/services/importService.js"></script>
 
 </head>
 
@@ -34,43 +34,8 @@
     <div id="map" class="map" ng-controller="MapController"></div>
 </div>
 
-<!-- load dialog -->
-<div id="myModal" class="modal fade" role="dialog" ng-controller="UploadDialogController">
-    <div class="modal-dialog">
+<div ng-include src="'app/templates/uploadDialog.html'"></div>
 
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Choose Data</h4>
-            </div>
-            <div class="modal-body">
-                <p>Choose the data to visualize.</p>
-
-                <form>
-                    <div class="input-group">
-                            <span class="input-group-btn">
-                                <span class="btn btn-primary btn-file">
-                                    Browse&hellip; <input type="file" id="file" on-read-file="selectFile(file)">
-                                </span>
-                            </span>
-                        <input type="text" class="form-control" readonly ng-model="fileName">
-                    </div>
-                    <span class="help-block">
-                        Your data will remain locally on your device and is not uploaded to the web.
-                    </span>
-
-                </form>
-
-            </div>
-
-
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" data-dismiss="modal" ng-click="main.visualize()">Visualize</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
 </div>
 
 
