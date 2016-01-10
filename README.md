@@ -10,6 +10,5 @@ This project is for visualizing your Google location data.
 * `cd /path/to/<git-root>`
 * `npm install bower -g`
 * `npm install -q`
-* `bower install`
 * `npm start`
 * open `localhost:9003` in browser
