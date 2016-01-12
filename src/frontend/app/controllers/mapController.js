@@ -1,5 +1,6 @@
 angular.module('blockweltapp').controller("MapController", function (projectionService, $scope) {
 
+    var interactionsWithoutRotating = ol.interaction.defaults({altShiftDragRotate:false, pinchRotate:false});
     var map = new ol.Map({
         layers: [
             new ol.layer.Tile({
@@ -10,7 +11,8 @@ angular.module('blockweltapp').controller("MapController", function (projectionS
         view: new ol.View({
             center: [1520000, 6880000],
             zoom: 6
-        })
+        }),
+        interactions: interactionsWithoutRotating
     });
 
     var updateMap = function() {
@@ -47,4 +49,4 @@ angular.module('blockweltapp').controller("MapController", function (projectionS
 
     const gridSize = 20;
 
-})
+});
