@@ -18,25 +18,12 @@ angular.module('blockweltapp').controller("MapController", function (projectionS
     var updateMap = function() {
         var extent = retrieveMapExtent();
 
-        var oldGrid = {
-            latitude: extent[1],
-            longitude: extent[0],
-            width: Math.abs(extent[1] - extent[3]) / gridSize,
-            height: Math.abs(extent[0] - extent[2]) / gridSize,
-            numLongitude: gridSize,
-            numLatitude: gridSize
-        };
-
-
         var grid = gridService.calculate({
             latitude: extent[1],
             longitude: extent[0],
             width: Math.abs(extent[1] - extent[3]),
             height: Math.abs(extent[0] - extent[2]),
         });
-
-        console.log("old: ", oldGrid);
-        console.log("new: ", grid);
 
         var projection = projectionService.project(grid, $scope.model.locations);
         var features = projectionService.convertToFeatures(projection);
