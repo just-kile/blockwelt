@@ -1,5 +1,6 @@
-angular.module('blockweltapp').controller("MapController", function (projectionService, $scope) {
+angular.module('blockweltapp').controller("MapController", function (projectionService, gridService, $scope) {
 
+    var interactionsWithoutRotating = ol.interaction.defaults({altShiftDragRotate:false, pinchRotate:false});
     var map = new ol.Map({
         layers: [
             new ol.layer.Tile({
@@ -10,20 +11,19 @@ angular.module('blockweltapp').controller("MapController", function (projectionS
         view: new ol.View({
             center: [1520000, 6880000],
             zoom: 6
-        })
+        }),
+        interactions: interactionsWithoutRotating
     });
 
     var updateMap = function() {
         var extent = retrieveMapExtent();
 
-        var grid = {
+        var grid = gridService.calculate({
             latitude: extent[1],
             longitude: extent[0],
-            width: Math.abs(extent[1] - extent[3]) / gridSize,
-            height: Math.abs(extent[0] - extent[2]) / gridSize,
-            numLongitude: gridSize,
-            numLatitude: gridSize
-        };
+            width: Math.abs(extent[1] - extent[3]),
+            height: Math.abs(extent[0] - extent[2]),
+        });
 
         var projection = projectionService.project(grid, $scope.model.locations);
         var features = projectionService.convertToFeatures(projection);
@@ -47,4 +47,4 @@ angular.module('blockweltapp').controller("MapController", function (projectionS
 
     const gridSize = 20;
 
-})
+});

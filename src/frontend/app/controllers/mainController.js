@@ -7,12 +7,12 @@ angular.module('blockweltapp').controller("MainController", function ($http, $sc
     };
 
     this.visualize = function () {
+        $scope.model.progress = true;
         var file = document.getElementById('file').files[0];
         var reader = new FileReader();
         reader.onloadend = function (e) {
             var data = e.target.result;
             var locations = angular.fromJson(data);
-
             $scope.$apply(function() {
                 importData(locations);
             });
@@ -21,6 +21,7 @@ angular.module('blockweltapp').controller("MainController", function ($http, $sc
     };
 
     this.showExampleData = function () {
+        $scope.model.progress = true;
         downloadData('example/locations.json');
     };
 
@@ -37,6 +38,7 @@ angular.module('blockweltapp').controller("MainController", function ($http, $sc
 
     function importData(locations) {
         $scope.model.locations = importService.importData(locations);
+        $scope.model.progress = false;
     }
 
 
