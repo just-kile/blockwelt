@@ -26,10 +26,16 @@ module.factory('projectionService', function () {
         return m;
     }
 
+
+    function createColor(block, maxCount) {
+        var c = 255 - 255 * Math.log(1 + block.count / maxCount);
+        var color = [255, Math.floor(c), 0, .6];
+        color = block.count == 0 ? [0, 0, 0, 0.2] : color;
+        return color;
+    }
+
     function createFeatureFromBlock(block, maxCount) {
-        var c = 255 - 255*Math.log(1 + block.count / maxCount);
-        var color = [255, Math.floor(c), 0,.6];
-        color = block.count == 0 ? [0,0,0,0.2] : color;
+        var color = createColor(block, maxCount);
         var style = new ol.style.Style({
             fill: new ol.style.Fill({
                 color: color
