@@ -27,11 +27,27 @@ module.factory('projectionService', function () {
     }
 
 
+    function mapBlockCount(block, maxCount) {
+        return Math.log(1 + block.count) / Math.log(maxCount);
+    }
+
     function createColor(block, maxCount) {
-        var c = 255 - 255 * Math.log(1 + block.count) / Math.log(maxCount);
-        var color = [255, Math.floor(c), 0, .6];
+        var c = Math.floor(255 - 255 * mapBlockCount(block, maxCount));
+        var color = [255, c, 0, .6];
         color = block.count == 0 ? [0, 0, 0, 0.2] : color;
         return color;
+    }
+
+    function getBlockText(block, maxCount) {
+        var text = new ol.style.Text();
+        if (block.count > 0) {
+            text.setFont('8px sans-serif');
+            text.setStroke(new ol.style.Stroke({width: 0.7}));
+            text.setText(block.count + "\n"
+                + maxCount + "\n"
+                + mapBlockCount(block, maxCount).toFixed(2));
+        }
+        return text;
     }
 
     function createFeatureFromBlock(block, maxCount) {
@@ -43,7 +59,8 @@ module.factory('projectionService', function () {
             stroke: new ol.style.Stroke({
                 color: 'black',
                 width: .1
-            })
+            }),
+            text: getBlockText(block, maxCount)
         });
         var extent = ol.proj.transformExtent([
             block.longitude,
