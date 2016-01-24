@@ -7,18 +7,19 @@ angular.module('blockweltapp').controller("MainController", function ($http, $sc
     };
 
     this.visualize = function () {
+        importService.initializePartialImport();
         $scope.model.progress = true;
         $scope.model.locations = [];
 
         var file = document.getElementById('file').files[0];
+
         const numChunks = 100;
 
         var fileSize = file.size;
         var chunkSize = file.size / numChunks;
         var offset = 0;
-        var readBlock = null;
 
-        var callback = function (data) {
+        var callbackProgress = function (data) {
 
             $scope.$apply(function () {
                 var newLocations = importService.importPartial(data);
@@ -26,33 +27,41 @@ angular.module('blockweltapp').controller("MainController", function ($http, $sc
             });
         }
 
-        var parseChunk = function (event) {
-            if (event.target.error == null) {
-                offset += event.target.result.length;
-                callback(event.target.result); // callback for handling read chunk
-            } else {
-                console.log("Read error: " + event.target.error);
-                return;
-            }
-            if (offset >= fileSize) {
-                $scope.$apply(function () {
-                    $scope.model.progress = false;
-                });
-                return;
-            }
 
-            readBlock(offset, chunkSize, file);
+        var callbackDone = function () {
+            $scope.$apply(function () {
+                $scope.model.progress = false;
+            });
         }
 
-        readBlock = function (_offset, length, _file) {
+
+        function readBlock(_offset, _chunkSize, _file, _cb) {
+
+
+            var parseChunk = function (event) {
+                if (event.target.error == null) {
+                    offset += event.target.result.length;
+                    callbackProgress(event.target.result);
+                } else {
+                    console.log("Read error: " + event.target.error);
+                    return;
+                }
+                if (offset >= fileSize) {
+                    callbackDone();
+                    return;
+                }
+
+                readBlock(_offset, _chunkSize, _file);
+            }
+
             var r = new FileReader();
-            var blob = _file.slice(_offset, length + _offset);
+            var blob = _file.slice(_offset, _chunkSize + _offset);
             r.onload = parseChunk;
             r.readAsBinaryString(blob);
         }
 
 
-        importService.initializePartialImport();
+
         readBlock(offset, chunkSize, file);
 
 
