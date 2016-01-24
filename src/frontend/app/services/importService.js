@@ -1,6 +1,6 @@
 var module = angular.module('blockweltapp');
 
-module.factory('importService', function() {
+module.factory('importService', function () {
 
     function doImport(googleData) {
         var model = []
@@ -17,15 +17,24 @@ module.factory('importService', function() {
         return model;
     }
 
+    function doImportData(googleData) {
+        var hasValidData = googleData && googleData.locations;
+        if (hasValidData) {
+            return doImport(googleData);
+        }
+        return [];
+    }
+
     var service = {
-        importData: function(googleData) {
-            var hasValidData = googleData && googleData.locations;
-            if (hasValidData) {
-                return doImport(googleData);
+        importData: doImportData,
+
+        importPartial: function (json) {
+            try {
+                return doImportData(angular.fromJson(json));
+            } catch (exception) {
+                return [];
             }
-            return [];
-        },
-        i: 0
+        }
     };
 
     return service;

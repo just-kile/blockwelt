@@ -51,4 +51,32 @@ describe('Import Service', function () {
         }))
 
     })
+
+    describe('When I import a partial JSON that is emtpy', function() {
+
+        it('returns an empty array', inject(function(importService) {
+            expect(importService.importPartial("").length).toEqual(0);
+        }))
+
+    })
+
+    describe('When I import a complete JSON partially', function() {
+
+        var json = ''
+            + '{'
+            + '  "locations": ['
+            + '     {'
+            + '       "timestampMs": "1452333103392",'
+            + '       "latitudeE7": 525557393,'
+            + '       "longitudeE7": 133418855,'
+            + '       "accuracy": 30'
+            + '     }'
+            + '  ]'
+            + '}';
+
+        it('returns an empty with size 1', inject(function(importService) {
+            expect(importService.importPartial(json).length).toEqual(1);
+        }))
+
+    });
 })
