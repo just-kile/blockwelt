@@ -1,4 +1,4 @@
-angular.module('blockweltapp').controller("MapController", function (projectionService, gridService, $scope) {
+angular.module('blockweltapp').controller("MapController", function (projectionService, blockToFeatureService, gridService, $scope) {
 
     var interactionsWithoutRotating = ol.interaction.defaults({altShiftDragRotate:false, pinchRotate:false});
     var map = new ol.Map({
@@ -26,7 +26,7 @@ angular.module('blockweltapp').controller("MapController", function (projectionS
         });
 
         var projection = projectionService.project(grid, $scope.model.locations);
-        var features = projectionService.convertToFeatures(projection);
+        var features = blockToFeatureService.convertToFeatures(projection);
         vectorSource.clear();
         vectorSource.addFeatures(features);
     };
