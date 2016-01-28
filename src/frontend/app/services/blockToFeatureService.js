@@ -16,7 +16,7 @@ module.factory('blockToFeatureService', function () {
 
 
     function mapBlockCount(block, maxCount) {
-        return Math.log(1 + block.count) / Math.log(maxCount);
+        return Math.log(1 + block.count) / Math.log(maxCount+1);
     }
 
     function createColor(block, maxCount) {
