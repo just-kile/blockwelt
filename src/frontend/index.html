@@ -12,6 +12,7 @@
     <script src="app/controllers/mainController.js"></script>
     <script src="app/controllers/mapController.js"></script>
     <script src="app/controllers/uploadDialogController.js"></script>
+    <script src="app/controllers/shareDataController.js"></script>
     <script src="app/services/projectionService.js"></script>
     <script src="app/services/blockToFeatureService.js"></script>
     <script src="app/services/importService.js"></script>
@@ -31,6 +32,10 @@
     <p>
         Upload:
         <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Open Modal</button>
+    </p>
+    <p ng-controller="ShareDataController">
+        Upload your data:
+        <button type="button" class="btn btn-info btn-sm" ng-click="share()">Share</button>
     </p>
     <div id="map" class="map" ng-controller="MapController"></div>
 </div>
