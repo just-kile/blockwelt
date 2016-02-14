@@ -16,7 +16,6 @@ module.exports = {
         if (!db) {
             connect();
         }
-        console.log('doh!')
         return db.get(collection);
     }
 

@@ -17,8 +17,6 @@ module.exports = function (db) {
         share: new ShareHandler(db)
     };
 
-    db.get("asdfasdfasdf");
-
     app.use(bodyParser.json());
     app.use(express.static('src/frontend'));
 
