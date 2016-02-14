@@ -11,5 +11,12 @@ This project is for visualizing your Google location data.
 * `cd /path/to/<git-root>`
 * `npm install bower -g`
 * `npm install -q`
+
+## Setup
+
+* Setup a mongodb on localhost:27017
+* ... e.g. via docker: `docker run -P --name blockwelt-db -d mongo`
+
+## Start
 * `npm start`
 * open `localhost:9003` in browser
