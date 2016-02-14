@@ -4,18 +4,17 @@
 
 angular.module('blockweltapp').controller("ShareDataController", function ($http, $scope) {
 
-
     var req = {
         method: 'POST',
         url: 'rest/share/upload',
-        data: {test: 'test'}
-    }
+        data: {locations: $scope.model.locations}
+    };
 
     $scope.share = function() {
-        $http(req).then(function () {
-            alert('success')
+        $http(req).then(function (response) {
+            $scope.model.shareURL = response.data.id;
         }, function () {
-            alert('failure')
+            $scope.model.shareURL = "ERROR";
         });
     };
 

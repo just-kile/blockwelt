@@ -36,6 +36,7 @@
     <p ng-controller="ShareDataController">
         Upload your data:
         <button type="button" class="btn btn-info btn-sm" ng-click="share()">Share</button>
+        <div id="shareURL">{{model.shareURL}}</div>
     </p>
     <div id="map" class="map" ng-controller="MapController"></div>
 </div>

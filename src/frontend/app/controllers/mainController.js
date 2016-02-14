@@ -2,7 +2,8 @@ angular.module('blockweltapp').controller("MainController", function ($http, $sc
 
     $scope.model = {
 
-        locations: []
+        locations: [],
+        shareURL: ''
 
     };
 
