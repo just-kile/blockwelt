@@ -1,5 +1,5 @@
 var monk = require('monk')
-var config = require('./config')
+var config = require('./config.json')
 var db;
 
 function connect() {
@@ -14,8 +14,9 @@ module.exports = {
 
     get: function (collection) {
         if (!db) {
-            setup();
+            connect();
         }
+        console.log('doh!')
         return db.get(collection);
     }
 

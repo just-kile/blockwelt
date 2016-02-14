@@ -7,7 +7,7 @@ angular.module('blockweltapp').controller("ShareDataController", function ($http
 
     var req = {
         method: 'POST',
-        url: 'rest/upload',
+        url: 'rest/share/upload',
         data: {test: 'test'}
     }
 
