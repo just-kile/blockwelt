@@ -48,7 +48,3 @@ angular.module('blockweltapp').controller("MapController", function (projectionS
     const gridSize = 20;
 
 });
-
-module.exports=function
-
-module.exports.$inject = []

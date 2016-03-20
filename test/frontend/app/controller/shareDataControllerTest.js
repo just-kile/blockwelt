@@ -31,8 +31,8 @@ describe('ShareData Controller', function () {
 
     describe('When I share data', function () {
         it('sends a post request to the backend', function () {
-            httpBackend.when('POST', 'rest/upload').respond(200, '');
-            httpBackend.expectPOST('rest/upload');
+            httpBackend.when('POST', 'rest/share/upload').respond(200, '');
+            httpBackend.expectPOST('rest/share/upload');
             scope.share();
             httpBackend.flush();
         });
@@ -41,8 +41,8 @@ describe('ShareData Controller', function () {
     describe('When I share data with one location', function () {
         it('sends the location the backend', function () {
             var expectedData = {locations: [{"latitude": testLatitude, "longitude": testLongitude}]};
-            httpBackend.when('POST', 'rest/upload').respond(200, {id: testId});
-            httpBackend.expectPOST('rest/upload', expectedData);
+            httpBackend.when('POST', 'rest/share/upload').respond(200, {id: testId});
+            httpBackend.expectPOST('rest/share/upload', expectedData);
             scope.share();
             httpBackend.flush();
             expect(scope.model.shareURL).toEqual(testId);
@@ -51,8 +51,8 @@ describe('ShareData Controller', function () {
 
     describe('When I try to share data and it fails', function () {
         it('shows an error message in the url field', function () {
-            httpBackend.when('POST', 'rest/upload').respond(500, '');
-            httpBackend.expectPOST('rest/upload');
+            httpBackend.when('POST', 'rest/share/upload').respond(500, '');
+            httpBackend.expectPOST('rest/share/upload');
             scope.share();
             httpBackend.flush();
             expect(scope.model.shareURL).toEqual('ERROR');
