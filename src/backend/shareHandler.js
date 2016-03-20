@@ -1,32 +1,26 @@
-var db;
+var Locations = require('./models/locations');
 
 function upload(request, response) {
-    console.log('foo');
     if (request.body && request.body.locations) {
-
-        db.get('locations').insert({locations: request.body.locations}, function (error, data) {
-            if (error) {
-                response.status(500).send(error);
-            } else {
-                response.status(200).json({id: data._id});
-            }
+        Locations.create({
+            locations: request.body.locations
+        }).then(function (data) {
+            response.status(200).json({id: data._id});
+        }, function (error) {
+            response.status(500).send(error);
         });
     } else {
-        console.log('foo');
         response.status(400).send('Invalid data.');
     }
 }
 
 function get(request, response) {
     var id = request.params.id;
-    console.log('asfasdf ', id)
     if (id) {
-        db.get('locations').findOne({_id: id}, function (error, data) {
-            if (error) {
-                response.status(500).send(error);
-            } else {
-                response.status(200).json(data);
-            }
+        Locations.findOne({_id: id}).then(function (data) {
+            response.status(200).json(data);
+        }, function (error) {
+            response.status(500).send(error);
         });
     } else {
         response.status(400).send();
@@ -34,6 +28,6 @@ function get(request, response) {
 }
 
 module.exports = function () {
-    this.upload = upload,
+    this.upload = upload;
     this.get = get
 };

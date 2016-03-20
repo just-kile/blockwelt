@@ -18,5 +18,5 @@ gulp.task('unit', ['mongodb:start'], function () {
 });
 
 gulp.task('unit:watch', function() {
-   gulp.watch(['test/**/*.js', 'src/**/*.js'], ['integration']);
+   gulp.watch(['test/**/*.js', 'src/**/*.js'], ['unit']);
 });
