@@ -4,7 +4,7 @@
   "description": "See where you have been and share with friends.",
   "main": "src/backend/backendServer.js",
   "scripts": {
-    "test": "gulp coveralls",
+    "test": "gulp test",
     "start": "node src/backend/index.js",
     "postinstall": "bower install --allow-root"
   },
