@@ -1,4 +1,6 @@
-angular.module('blockweltapp').controller("LoadDialogController", function ($scope) {
+var module = angular.module('blockweltapp');
+
+module.controller("LoadDialogController", function ($scope) {
     var selectedFile;
 
     $scope.selectFile = function(file) {
