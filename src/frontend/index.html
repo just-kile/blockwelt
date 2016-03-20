@@ -11,38 +11,33 @@
     <script src="app/app.js"></script>
     <script src="app/controllers/mainController.js"></script>
     <script src="app/controllers/mapController.js"></script>
-    <script src="app/controllers/uploadDialogController.js"></script>
+    <script src="app/controllers/welcomeDialogController.js"></script>
+    <script src="app/controllers/loadDialogController.js"></script>
     <script src="app/controllers/shareDataController.js"></script>
     <script src="app/services/projectionService.js"></script>
     <script src="app/services/blockToFeatureService.js"></script>
     <script src="app/services/importService.js"></script>
     <script src="app/services/gridService.js"></script>
-
 </head>
 
 <body ng-controller="MainController as main">
 
-<div class="container">
-    <h1>Welcome to Block Welt</h1>
+<div id="map" class="map" ng-controller="MapController"></div>
 
-    <p>
-        Testing:
-        <button type="button" class="btn btn-info btn-sm" ng-click="main.showExampleData()">Use example data</button>
-    </p>
-    <p>
-        Upload:
-        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Open Modal</button>
-    </p>
-    <p ng-controller="ShareDataController">
-        Upload your data:
-        <button type="button" class="btn btn-info btn-sm" ng-click="share()">Share</button>
-        <div id="shareURL">{{model.shareURL}}</div>
-    </p>
-    <div id="map" class="map" ng-controller="MapController"></div>
-</div>
+<button type="button" id="btn-share" class="btn btn-primary map-controls" ng-controller="ShareDataController"
+        ng-click="share()">Share
+</button>
+<button type="button" id="btn-example" class="btn btn-primary map-controls" ng-click="main.showExampleData()">Show
+    Example
+</button>
+<button type="button" id="btn-load" class="btn btn-primary map-controls" ng-controller="LoadDialogController"
+        ng-click="loadData()">Load your own
+</button>
 
-<div ng-include src="'app/templates/uploadDialog.html'"></div>
 <div ng-include src="'app/templates/progressDialog.html'"></div>
+<div ng-include src="'app/templates/welcomeDialog.html'"></div>
+<div ng-include src="'app/templates/loadDialog.html'"></div>
+<div ng-include src="'app/templates/shareDialog.html'"></div>
 
 </body>
 </html>

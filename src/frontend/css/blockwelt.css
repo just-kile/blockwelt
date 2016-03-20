@@ -2,6 +2,7 @@
     position: relative;
     overflow: hidden;
 }
+
 .btn-file input[type=file] {
     position: absolute;
     top: 0;
@@ -16,6 +17,25 @@
     cursor: inherit;
     display: block;
 }
+
+.map-controls {
+    position: absolute;
+    left: 20px;
+    width: 120px;
+}
+
+#btn-share {
+    top: 20px;
+}
+
+#btn-example {
+    top: 60px;
+}
+
+#btn-load {
+    top: 100px;
+}
+
 input[readonly] {
     background-color: white !important;
     cursor: text !important;

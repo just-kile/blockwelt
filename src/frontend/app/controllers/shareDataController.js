@@ -1,11 +1,11 @@
-/**
- * Created by thomas on 14.02.16.
- */
-
 angular.module('blockweltapp').controller("ShareDataController", function ($http, $scope) {
 
 
     $scope.share = function() {
+        $('#shareDialog').modal('show');
+    };
+
+    $scope.shareData = function() {
         var req = {
             method: 'POST',
             url: 'rest/share/upload',
@@ -17,6 +17,6 @@ angular.module('blockweltapp').controller("ShareDataController", function ($http
         }, function () {
             $scope.model.shareURL = "ERROR";
         });
-    };
+    }
 
 });

@@ -26,19 +26,16 @@ angular.module('blockweltapp').controller("MainController", function ($http, $sc
                 var newLocations = importService.importPartial(data);
                 $scope.model.locations = $scope.model.locations.concat(newLocations);
             });
-        }
+        };
 
 
         var callbackDone = function () {
             $scope.$apply(function () {
                 $scope.model.progress = false;
             });
-        }
-
+        };
 
         function readBlock(_offset, _chunkSize, _file, _cb) {
-
-
             var parseChunk = function (event) {
                 if (event.target.error == null) {
                     offset += event.target.result.length;
@@ -53,19 +50,14 @@ angular.module('blockweltapp').controller("MainController", function ($http, $sc
                 }
 
                 readBlock(_offset, _chunkSize, _file);
-            }
+            };
 
             var r = new FileReader();
             var blob = _file.slice(_offset, _chunkSize + _offset);
             r.onload = parseChunk;
             r.readAsBinaryString(blob);
         }
-
-
-
         readBlock(offset, chunkSize, file);
-
-
     };
 
     this.showExampleData = function () {
@@ -88,6 +80,4 @@ angular.module('blockweltapp').controller("MainController", function ($http, $sc
         $scope.model.locations = importService.importData(locations);
         $scope.model.progress = false;
     }
-
-
 });
