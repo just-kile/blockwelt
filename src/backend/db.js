@@ -13,7 +13,7 @@ function connect() {
         deferred.resolve();
     });
 
-    return deferred.promise();
+    return deferred.promise;
 }
 
 module.exports = {
