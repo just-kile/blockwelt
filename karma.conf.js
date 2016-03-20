@@ -26,7 +26,7 @@ module.exports = function (config) {
             'src/frontend/components/angular/angular.js',
             'src/frontend/components/angular-mocks/angular-mocks.js',
             'src/frontend/app/**/*.js',
-            'test/**/*Test.js'
+            'test/frontend/**/*Test.js'
         ],
 
 
@@ -37,7 +37,7 @@ module.exports = function (config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            'test/**/*Test.js': ['browserify'], //Mention path as per your test js folder
+            'test/frontend/**/*Test.js': ['browserify'], //Mention path as per your test js folder
             'src/frontend/app/**/*.js': 'coverage'
         },
 
