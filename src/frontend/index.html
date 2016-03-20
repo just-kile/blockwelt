@@ -12,6 +12,7 @@
     <script src="app/controllers/mainController.js"></script>
     <script src="app/controllers/mapController.js"></script>
     <script src="app/controllers/uploadDialogController.js"></script>
+    <script src="app/controllers/welcomeDialogController.js"></script>
     <script src="app/controllers/shareDataController.js"></script>
     <script src="app/services/projectionService.js"></script>
     <script src="app/services/blockToFeatureService.js"></script>
@@ -22,7 +23,7 @@
 
 <body ng-controller="MainController as main">
 
-<div class="container">
+<!--<div class="container">
     <h1>Welcome to Block Welt</h1>
 
     <p>
@@ -38,11 +39,12 @@
         <button type="button" class="btn btn-info btn-sm" ng-click="share()">Share</button>
         <div id="shareURL">{{model.shareURL}}</div>
     </p>
-    <div id="map" class="map" ng-controller="MapController"></div>
-</div>
+</div>-->
+<div id="map" class="map" ng-controller="MapController"></div>
 
 <div ng-include src="'app/templates/uploadDialog.html'"></div>
 <div ng-include src="'app/templates/progressDialog.html'"></div>
+<div ng-include src="'app/templates/welcomeDialog.html'"></div>
 
 </body>
 </html>

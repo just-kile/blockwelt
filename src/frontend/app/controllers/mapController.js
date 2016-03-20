@@ -22,7 +22,7 @@ angular.module('blockweltapp').controller("MapController", function (projectionS
             latitude: extent[1],
             longitude: extent[0],
             width: Math.abs(extent[1] - extent[3]),
-            height: Math.abs(extent[0] - extent[2]),
+            height: Math.abs(extent[0] - extent[2])
         });
 
         var projection = projectionService.project(grid, $scope.model.locations);
@@ -48,7 +48,3 @@ angular.module('blockweltapp').controller("MapController", function (projectionS
     const gridSize = 20;
 
 });
-
-module.exports=function
-
-module.exports.$inject = []
