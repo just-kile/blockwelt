@@ -12,6 +12,7 @@ gulp.task('unit:backend', ['mongodb:start'], function () {
     return gulp.src('test/backend/**/*.js')
         .pipe(cover.instrument({
             pattern: ['src/backend/**/*.js'],
+            debugDirectory: 'coverage/debug'
         }))
         .pipe(jasmine({verbose: true}))
         .pipe(cover.gather())
