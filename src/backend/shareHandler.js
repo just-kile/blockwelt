@@ -1,7 +1,9 @@
 var db;
 
 function upload(request, response) {
+    console.log('foo');
     if (request.body && request.body.locations) {
+
         db.get('locations').insert({locations: request.body.locations}, function (error, data) {
             if (error) {
                 response.status(500).send(error);
@@ -10,6 +12,7 @@ function upload(request, response) {
             }
         });
     } else {
+        console.log('foo');
         response.status(400).send('Invalid data.');
     }
 }
@@ -30,9 +33,7 @@ function get(request, response) {
     }
 }
 
-module.exports = function (_db) {
-    db = _db;
-
+module.exports = function () {
     this.upload = upload,
     this.get = get
 };

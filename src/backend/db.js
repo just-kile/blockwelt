@@ -1,9 +1,19 @@
-var monk = require('monk')
-var config = require('./config.json')
+var config = require('./config.json');
+var mongoose = require('mongoose');
+var q = require('q');
+
 var db;
 
 function connect() {
-    db = monk(config.db.url);
+    mongoose.connect(config.db.url);
+    var deferred = q.defer();
+
+    db = mongoose.connection;
+    db.once('open', function() {
+        deferred.resolve();
+    });
+
+    return deferred.promise();
 }
 
 module.exports = {
@@ -12,11 +22,8 @@ module.exports = {
         db.close();
     },
 
-    get: function (collection) {
-        if (!db) {
-            connect();
-        }
-        return db.get(collection);
+    connect: function () {
+        return connect();
     }
 
 };

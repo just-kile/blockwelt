@@ -10,11 +10,12 @@ module.exports = function (db) {
 
     var ShareHandler = require('./shareHandler');
     var routes = require('./routes');
+    var db = require('./db');
 
     var port = 9003;
 
     var handlers = {
-        share: new ShareHandler(db)
+        share: new ShareHandler()
     };
 
     app.use(bodyParser.json());
@@ -27,6 +28,7 @@ module.exports = function (db) {
     return {
         run: function () {
             server = app.listen(port);
+            db.connect();
             console.log('Blockwelt is up and running.');
         },
 
