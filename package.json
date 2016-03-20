@@ -4,7 +4,7 @@
   "description": "See where you have been and share with friends.",
   "main": "src/backend/backendServer.js",
   "scripts": {
-    "test": "karma start --single-run",
+    "test": "gulp coveralls",
     "start": "node src/backend/index.js",
     "postinstall": "bower install --allow-root"
   },
@@ -29,6 +29,8 @@
     "coveralls": "^2.11.6",
     "expect.js": "^0.3.1",
     "gulp": "^3.9.1",
+    "gulp-coverage": "^0.3.38",
+    "gulp-coveralls": "^0.1.4",
     "gulp-jasmine": "^2.3.0",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.19",
