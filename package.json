@@ -5,7 +5,7 @@
   "main": "src/backend/backendServer.js",
   "scripts": {
     "test": "karma start --single-run",
-    "start": "node src/backend/backendServer.js",
+    "start": "node src/backend/index.js",
     "postinstall": "bower install --allow-root"
   },
   "repository": {
@@ -19,10 +19,17 @@
   },
   "homepage": "https://github.com/just-kile/blockwelt#readme",
   "dependencies": {
-    "express": "^4.13.3"
+    "body-parser": "^1.15.0",
+    "express": "^4.13.3",
+    "mongodb": "^1.4",
+    "mongoose": "^4.4.7",
+    "require-dir": "^0.3.0"
   },
   "devDependencies": {
     "coveralls": "^2.11.6",
+    "expect.js": "^0.3.1",
+    "gulp": "^3.9.1",
+    "gulp-jasmine": "^2.3.0",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.19",
     "karma-browserify": "^4.4.2",
@@ -30,6 +37,13 @@
     "karma-coverage": "^0.5.3",
     "karma-coveralls": "^1.1.2",
     "karma-firefox-launcher": "^0.1.7",
-    "karma-jasmine": "^0.3.6"
+    "karma-jasmine": "^0.3.6",
+    "mockgoose": "^5.3.3",
+    "mockrequire": "0.0.5",
+    "proxyquire": "^1.7.4",
+    "rewire": "^2.5.1",
+    "run-sequence": "^1.1.5",
+    "sinon": "^1.17.3",
+    "supertest": "^1.2.0"
   }
 }
