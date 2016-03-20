@@ -4,5 +4,7 @@ module.controller("WelcomeDialogController", function ($scope) {
     var welcome = function(){
         $('#welcomeDialog').modal('show');
     };
-    welcome();
+    if ($scope.model.locations.length == 0){
+        welcome();
+    }
 });

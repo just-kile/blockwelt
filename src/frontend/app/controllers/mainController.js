@@ -1,4 +1,4 @@
-angular.module('blockweltapp').controller("MainController", function ($http, $scope, importService) {
+angular.module('blockweltapp').controller("MainController", function ($http, $scope, importService, $location) {
 
     $scope.model = {
 
@@ -6,6 +6,11 @@ angular.module('blockweltapp').controller("MainController", function ($http, $sc
         shareURL: ''
 
     };
+
+    var id = $location.url().split('/')[3];
+    if (id){
+        loadSharedData(id);
+    }
 
     this.visualize = function () {
         importService.initializePartialImport();
@@ -79,5 +84,16 @@ angular.module('blockweltapp').controller("MainController", function ($http, $sc
     function importData(locations) {
         $scope.model.locations = importService.importData(locations);
         $scope.model.progress = false;
+    }
+
+    function loadSharedData(id) {
+        $http({
+            method: 'GET',
+            url: 'rest/share/' + id
+        }).success(function (data) {
+            $scope.model.locations = data.locations;
+        }).error(function () {
+            alert("Error while downloading the data.");
+        });
     }
 });

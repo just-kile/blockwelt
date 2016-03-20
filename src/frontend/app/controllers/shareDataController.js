@@ -20,7 +20,7 @@ angular.module('blockweltapp').controller("ShareDataController", function ($http
             if (port != 80){
                 $scope.model.shareURL += ":" + port;
             }
-            $scope.model.shareURL += "/rest/share/" + response.data.id;
+            $scope.model.shareURL += "/#/rest/share/" + response.data.id;
         }, function () {
             $scope.model.shareURL = "ERROR";
         });
