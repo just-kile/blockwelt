@@ -14,9 +14,9 @@ This project is for visualizing your Google location data.
 
 ## Setup
 
-* Setup a mongodb on localhost:27017
-* ... e.g. via docker: `docker run -p 27017:27017 --name blockwelt-db -d mongo`
+* Setup a mongodb: `docker run -p 27017:27017 --name blockwelt-db -d mongo`
+* Build blockwelt: `docker build -t blockwelt .`
 
 ## Start
-* `npm start`
+* `sudo docker run --name blockwelt --link blockwelt-db:mongodb -p 9003:9003 blockwelt`
 * open `localhost:9003` in browser
