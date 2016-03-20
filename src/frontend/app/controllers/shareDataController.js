@@ -1,4 +1,4 @@
-angular.module('blockweltapp').controller("ShareDataController", function ($http, $scope) {
+angular.module('blockweltapp').controller("ShareDataController", function ($http, $scope, $location) {
 
 
     $scope.share = function() {
@@ -13,7 +13,14 @@ angular.module('blockweltapp').controller("ShareDataController", function ($http
         };
 
         $http(req).then(function (response) {
-            $scope.model.shareURL = response.data.id;
+            var host = $location.host();
+            var port = $location.port();
+
+            $scope.model.shareURL = "http://" + host;
+            if (port != 80){
+                $scope.model.shareURL += ":" + port;
+            }
+            $scope.model.shareURL += "/rest/share/" + response.data.id;
         }, function () {
             $scope.model.shareURL = "ERROR";
         });
