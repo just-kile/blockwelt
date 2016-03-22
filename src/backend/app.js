@@ -12,7 +12,7 @@ module.exports = function (db) {
     var routes = require('./routes');
     var db = require('./db');
 
-    var port = 9003;
+    var port = 8080;
 
     var handlers = {
         share: new ShareHandler()
