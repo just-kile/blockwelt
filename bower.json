@@ -14,6 +14,7 @@
     "angular": "~1.4.8",
     "angular-mocks": "~1.4.8",
     "bootstrap": "~3.3.6",
-    "open-layers3": "https://github.com/openlayers/ol3/releases/download/v3.12.0/v3.12.0-dist.zip"
+    "open-layers3": "https://github.com/openlayers/ol3/releases/download/v3.12.0/v3.12.0-dist.zip",
+    "angular-bootstrap": "^1.2.5"
   }
 }
