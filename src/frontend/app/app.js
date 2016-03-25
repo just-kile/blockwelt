@@ -1,1 +1,1 @@
-var App = angular.module('blockweltapp', []);
+var App = angular.module('blockweltapp', ['ui.bootstrap']);

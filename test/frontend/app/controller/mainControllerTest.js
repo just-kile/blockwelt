@@ -6,7 +6,7 @@ describe('Main Controller', function () {
     beforeEach(angular.mock.module("blockweltapp"));
 
     beforeEach(function() {
-        inject(function($rootScope, $controller, $http, importService){
+        inject(function($rootScope, $controller, $http, importService, $uibModal){
             scope=$rootScope.$new();
 
 

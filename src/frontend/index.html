@@ -8,6 +8,7 @@
     <script src="components/open-layers3/ol.js"></script>
     <script src="components/angular/angular.min.js"></script>
     <script src="components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 
     <script src="app/app.js"></script>
     <script src="app/controllers/mainController.js"></script>
@@ -36,7 +37,7 @@
 </button>
 
 <div ng-include src="'app/templates/progressDialog.html'"></div>
-<div ng-include src="'app/templates/welcomeDialog.html'"></div>
+<div class="modal" ng-include src="'app/templates/welcomeDialog.html'"></div>
 <div ng-include src="'app/templates/loadDialog.html'"></div>
 <div ng-include src="'app/templates/shareDialog.html'"></div>
 

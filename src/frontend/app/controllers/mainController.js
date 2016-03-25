@@ -1,4 +1,4 @@
-angular.module('blockweltapp').controller("MainController", function ($http, $scope, importService, $location) {
+angular.module('blockweltapp').controller("MainController", function ($http, $scope, importService, $location, $uibModal) {
 
     $scope.model = {
 
@@ -10,6 +10,22 @@ angular.module('blockweltapp').controller("MainController", function ($http, $sc
     var id = $location.url().split('/')[3];
     if (id){
         loadSharedData(id);
+    } else {
+        showWelcomeDialog();
+    }
+
+    function showWelcomeDialog() {
+        var modalInstance = $uibModal.open({
+            templateUrl: 'app/templates/welcomeDialog.html',
+            controller: 'WelcomeDialogController',
+            backdrop: false
+        });
+        modalInstance.result.then(function (response) {
+            if (response == 'example'){
+                showExampleData();
+            }
+        })
+
     }
 
     this.visualize = function () {
@@ -65,10 +81,10 @@ angular.module('blockweltapp').controller("MainController", function ($http, $sc
         readBlock(offset, chunkSize, file);
     };
 
-    this.showExampleData = function () {
+    function showExampleData () {
         $scope.model.progress = true;
         downloadData('example/locations.json');
-    };
+    }
 
     function downloadData(path) {
         $http({
