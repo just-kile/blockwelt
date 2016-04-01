@@ -1,15 +1,23 @@
 var module = angular.module('blockweltapp');
 
-module.controller("LoadDialogController", function ($scope) {
+module.controller("LoadDialogController", function ($scope, $uibModal) {
+
+
+    $scope.loadData = function(){
+        var modalInstance = $uibModal.open({
+            templateUrl: 'app/templates/loadDialog.html',
+            controller: 'LoadDialogWindowController',
+            backdrop: false
+        });
+    };
+});
+
+module.controller("LoadDialogWindowController", function ($scope, $uibModalInstance) {
     var selectedFile;
 
     $scope.selectFile = function(file) {
         selectedFile = file;
         $scope.fileName = file.name;
-    };
-
-    $scope.loadData = function(){
-        $('#loadDialog').modal('show');
     };
 });
 

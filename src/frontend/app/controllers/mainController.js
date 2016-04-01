@@ -11,24 +11,15 @@ angular.module('blockweltapp').controller("MainController", function ($http, $sc
     if (id){
         loadSharedData(id);
     } else {
-        showWelcomeDialog();
+        $scope.showWelcomeDialog();
     }
 
-    function showWelcomeDialog() {
-        var modalInstance = $uibModal.open({
-            templateUrl: 'app/templates/welcomeDialog.html',
-            controller: 'WelcomeDialogController',
-            backdrop: false
-        });
-        modalInstance.result.then(function (response) {
-            if (response == 'example'){
-                showExampleData();
-            }
-        })
-
+    function showLoadDialog(){
+        console.log("loading now")
     }
 
     this.visualize = function () {
+        console.log('visalize is called');
         importService.initializePartialImport();
         $scope.model.progress = true;
         $scope.model.locations = [];
@@ -81,10 +72,10 @@ angular.module('blockweltapp').controller("MainController", function ($http, $sc
         readBlock(offset, chunkSize, file);
     };
 
-    function showExampleData () {
+    $scope.showExampleData = function () {
         $scope.model.progress = true;
         downloadData('example/locations.json');
-    }
+    };
 
     function downloadData(path) {
         $http({

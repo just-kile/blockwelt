@@ -1,43 +1,38 @@
-<div id="loadDialog" class="modal fade" role="dialog" ng-controller="LoadDialogController">
-    <div class="modal-dialog">
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Visualize your own data</h4>
+    </div>
+    <div class="modal-body">
+        <p>Follow these steps to see your data visualized on the map. (Your data does not leave your
+            computer)</p>
 
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Visualize your own data</h4>
-            </div>
-            <div class="modal-body">
-                <p>Follow these steps to see your data visualized on the map. (Your data does not leave your
-                    computer)</p>
-
-                <ol>
-                    <li>
-                        Get your data google location history data from <a
-                            href="https://takeout.google.com/settings/takeout" target="_blank"> the takeout project</a>
-                        as json.
-                    </li>
-                    <li>Select your data here
-                        <form>
-                            <div class="input-group">
+        <ol>
+            <li>
+                Get your data google location history data from <a
+                    href="https://takeout.google.com/settings/takeout" target="_blank"> the takeout project</a>
+                as json.
+            </li>
+            <li>Select your data here
+                <form>
+                    <div class="input-group">
                                 <span class="input-group-btn">
                                     <span class="btn btn-primary btn-file">
                                         Browse&hellip; <input type="file" id="file" on-read-file="selectFile(file)">
                                     </span>
                                 </span>
-                                <input type="text" class="form-control" readonly ng-model="fileName">
-                            </div>
+                        <input type="text" class="form-control" readonly ng-model="fileName">
+                    </div>
                             <span class="help-block">
                                 Your data will remain locally on your device and is not uploaded to the web.
                             </span>
-                        </form>
-                    </li>
-                    <li>
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal" ng-click="main.visualize()">
-                            Visualize
-                        </button>
-                    </li>
-                </ol>
-            </div>
-        </div>
+                </form>
+            </li>
+            <li>
+                <button type="submit" class="btn btn-primary" data-dismiss="modal" ng-click="main.visualize()">
+                    Visualize
+                </button>
+            </li>
+        </ol>
     </div>
 </div>
