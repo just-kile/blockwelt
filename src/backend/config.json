@@ -1,5 +1,5 @@
 {
   "db": {
-    "url" : "localhost:27017/blockwelt"
+    "url" : "mongodb:27017/blockwelt"
   }
 }
